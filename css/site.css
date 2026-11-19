@@ -584,3 +584,9 @@ footer{background:var(--deep2);color:#bdb4ee;font-size:14px;padding:24px max(5vw
 .wadlg input,.wadlg select{width:100%;min-height:44px;border:1.5px solid #dcd9e3;border-radius:8px;padding:8px 10px;font-size:16px;margin-top:4px;background:#fff;color:#17141f}
 .wadlg-a{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.wadlg-a .btn:not(.solid){color:#17141f}
 .wago{background:#25d366!important;border-color:#25d366!important}
+
+/* auditoría */
+.msuma{min-height:40px}
+.cycle b{color:light-dark(#14532d,#6ee7a0)}
+.cycle div.on b{color:#f28c1e}
+@media (max-width:400px){.btn{white-space:normal;text-align:center}.result .btn{width:100%}}
