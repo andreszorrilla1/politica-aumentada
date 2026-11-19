@@ -9,9 +9,9 @@ let tt;const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on')
 /* ---------- estado y personalización ---------- */
 const DEF={name:'Ana Restrepo',role:'Alcaldía',place:'Villa del Río'};
 const COLORS=['#e8364f','#1f6feb','#f59e0b','#16a34a','#7c3aed','#0f766e','#111827'];
-const st={name:'',role:'Alcaldía',place:'',color:COLORS[0],photo:'',mods:new Set(),e3:false};
-try{const s=JSON.parse(localStorage.getItem('pa-state')||'{}');Object.assign(st,{name:s.name||'',role:s.role||'Alcaldía',place:s.place||'',color:s.color||COLORS[0]});st.mods=new Set(s.mods||[]);st.e3=!!s.e3}catch(e){}
-const save=()=>{try{localStorage.setItem('pa-state',JSON.stringify({name:st.name,role:st.role,place:st.place,color:st.color,mods:[...st.mods],e3:st.e3}))}catch(e){}};
+const st={contact:'',name:'',role:'Alcaldía',place:'',color:COLORS[0],photo:'',mods:new Set(),e3:false};
+try{const s=JSON.parse(localStorage.getItem('pa-state')||'{}');Object.assign(st,{contact:s.contact||'',name:s.name||'',role:s.role||'Alcaldía',place:s.place||'',color:s.color||COLORS[0]});st.mods=new Set(s.mods||[]);st.e3=!!s.e3}catch(e){}
+const save=()=>{try{localStorage.setItem('pa-state',JSON.stringify({contact:st.contact,name:st.name,role:st.role,place:st.place,color:st.color,mods:[...st.mods],e3:st.e3}))}catch(e){}};
 const N=()=>esc(st.name.trim()||DEF.name),P=()=>esc(st.place.trim()||DEF.place),R=()=>esc(st.role);
 const roleArt=()=>({Alcaldía:'la Alcaldía',Gobernación:'la Gobernación',Concejo:'el Concejo',Asamblea:'la Asamblea'}[st.role]);
 const silhouette=()=>`<svg viewBox="0 0 200 200" aria-hidden="true"><rect width="200" height="200" fill="#d9d2f5"/><circle cx="100" cy="82" r="40" fill="#8b7fd1"/><path d="M28 200c6-52 38-74 72-74s66 22 72 74z" fill="#6c5fbf"/></svg>`;
@@ -72,7 +72,7 @@ $('#dolores').innerHTML=PAINS.map((p,i)=>{const lines=p.mods.map(k=>MK[k]);const
  ${p.mods.map(k=>MK[k]).map(m=>`<div class="pp"><span class="tagp">Producto · pago único</span><b>${m.n}</b><div class="amt">${M(m.p)}</div><button class="pick" type="button" data-pain="${p.id}" aria-pressed="false"><span class="box"></span>Agregar producto a mi plan</button></div>`).join('')}
  ${p.svc?`<div class="pp"><span class="tagp">Servicio mensual · ${p.combo?'agencia':'opcional'}</span><b>${MK[p.svc].n}</b><div class="amt sm">${M(MK[p.svc].p)} <small>/ mes</small></div><small class="per">${MK[p.svc].q}</small><button class="pick" type="button" data-mod="${p.svc}" aria-pressed="false"><span class="box"></span>Agregar servicio mensual</button></div>`:''}
  ${p.combo?`<p class="combo">Si contratas el servicio gráfico y el audiovisual juntos, los dos quedan en ${M(COMBO)} al mes.</p>`:''}
- <div class="per">Concejo o municipio pequeño, antes de IVA. El valor sube según la escala de la campaña.</div></div>
+ <div class="per">Concejo o municipio pequeño, antes de IVA. El valor sube según la escala de la campaña. No incluye suscripciones a plataformas de IA ni costos de integración tecnológica (APIs, hosting, dominios, entre otros).</div></div>
 </div>${p.tabs?`<div class="demo reveal"><div class="seg ptabs" role="tablist">${p.tabs.map((t,k)=>`<button type="button" data-pane="${t[1]}" aria-pressed="${!k}">${t[0]}</button>`).join('')}</div>${p.tabs.map((t,k)=>`<div class="pane" id="demo-${t[1]}"${k?' hidden':''}></div>`).join('')}</div>`:`<div class="demo reveal" id="demo-${p.id}"></div>`}</div></div></section>`}).join('');
 $('#dolores').addEventListener('click',e=>{const tb=e.target.closest('.ptabs button');if(tb){const box=tb.closest('.demo');box.querySelectorAll('.ptabs button').forEach(x=>x.setAttribute('aria-pressed',x==tb));box.querySelectorAll('.pane').forEach(p=>p.hidden=p.id!='demo-'+tb.dataset.pane);return}const md=e.target.closest('.pick[data-mod]');if(md){const k=md.dataset.mod;const on=st.mods.has(k);on?st.mods.delete(k):st.mods.add(k);syncPicks();toast(on?'Servicio quitado de tu plan':'Servicio agregado a tu plan');return}const b=e.target.closest('.pick');if(b){const was=b.getAttribute('aria-pressed')=='true';togglePain(b.dataset.pain);toast(was?'Quitado de tu plan':'Agregado a tu plan')}});
 
@@ -346,10 +346,18 @@ $('#toContact').addEventListener('click',()=>{$('#contacto').scrollIntoView();$(
 $('#msg').addEventListener('input',()=>{if(WA)$('#waBtn').href='https://wa.me/'+WA+'?text='+encodeURIComponent($('#msg').value)});
 let extra='';
 /* Número de WhatsApp con indicativo, solo dígitos. Ej.: 573001234567 */
-const WA='';
+const WA='573206621546';
 function setMsg(x){if(x!==undefined)extra=x;const sc=$('#scale').selectedOptions[0].textContent;const items=lastLines.filter(l=>l[1]>0).map(l=>l[0]);
- $('#msg').value=`Hola Andrés. Quiero agendar el diagnóstico de 45 minutos.\nCandidatura: ${st.name.trim()||'(nombre)'} · ${st.role} de ${st.place.trim()||'(municipio)'}\nEscala: ${sc}\nDolores marcados: ${PAINS.filter(painOn).map(p=>p.short).join(', ')||'por definir'}${st.e3?', datos electorales (Estrategia 360)':''}\nServicios de interés: ${items.join(', ')||'por definir'}\nInversión de referencia: ${lastLines.length?fmt(lastTotal)+' antes de IVA':'por definir'}${extra?'\n'+extra:''}`;const wa=$('#waBtn');if(WA){wa.hidden=false;wa.href='https://wa.me/'+WA+'?text='+encodeURIComponent($('#msg').value);$('#waTxt').textContent='WhatsApp: +'+WA}}
+ $('#msg').value=`Hola Andrés${st.contact?`, soy ${st.contact}`:''}. Quiero agendar el diagnóstico de 45 minutos.\nCandidatura: ${st.name.trim()||'(nombre)'} · ${st.role} de ${st.place.trim()||'(municipio)'}\nEscala: ${sc}\nDolores marcados: ${PAINS.filter(painOn).map(p=>p.short).join(', ')||'por definir'}${st.e3?', datos electorales (Estrategia 360)':''}\nServicios de interés: ${items.join(', ')||'por definir'}\nInversión de referencia: ${lastLines.length?fmt(lastTotal)+' antes de IVA':'por definir'}${extra?'\n'+extra:''}`;const wa=$('#waBtn');if(WA){wa.hidden=false;wa.href='https://wa.me/'+WA+'?text='+encodeURIComponent($('#msg').value);$('#waTxt').textContent='WhatsApp: +57 320 662 1546'}}
 $('#copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#msg').value);toast('Mensaje copiado')}catch(e){$('#msg').select();toast('Selecciona y copia el mensaje')}});
+
+
+/* WhatsApp: pedir datos si faltan */
+const waURL=()=>'https://wa.me/'+WA+'?text='+encodeURIComponent($('#msg').value);
+$('#waBtn').addEventListener('click',e=>{if(st.contact.trim()&&st.name.trim()&&st.place.trim())return;e.preventDefault();$('#wContact').value=st.contact;$('#wName').value=st.name;$('#wPlace').value=st.place;$('#wRole').value=[...$('#wRole').options].some(o=>o.value==st.role)?st.role:'Alcaldía';$('#waGo').hidden=true;try{$('#waDlg').showModal()}catch(err){}});
+$('#waForm').addEventListener('submit',e=>{e.preventDefault();st.contact=$('#wContact').value.trim();st.name=$('#wName').value.trim();st.place=$('#wPlace').value.trim();st.role=$('#wRole').value;$('#pName').value=st.name;$('#pPlace').value=st.place;if([...$('#pRole').options].some(o=>o.value==st.role))$('#pRole').value=st.role;applyBrand();save();setMsg();$('#waGo').href=waURL();$('#waGo').hidden=false;$('#waGo').focus()});
+$('#waGo').addEventListener('click',()=>setTimeout(()=>$('#waDlg').close(),300));
+$('#waCancel').addEventListener('click',()=>$('#waDlg').close());
 
 /* ---------- scroll: progreso, revelado, flujos ---------- */
 const io=new IntersectionObserver(es=>es.forEach(en=>{if(!en.isIntersecting)return;en.target.classList.add('in');if(en.target.id=='e3hero'){e3anim();hotCycle();startTour()}en.target.querySelectorAll('.flow').forEach(f=>f.classList.add('on'));io.unobserve(en.target)}),{threshold:.15});

@@ -143,6 +143,7 @@
   <div class="soft small" id="perMonth"></div>
   <div class="lines" id="lines"></div>
   <p class="small soft">Pagos por hitos: 40% al inicio, 30% a mitad del proyecto y 30% contra entrega. Los servicios mensuales se facturan mes vencido.</p>
+  <p class="small soft">Los valores no incluyen suscripciones a plataformas de IA ni otros costos de integración tecnológica: APIs, hosting, dominios, entre otros.</p>
   <button class="btn solid" id="toContact" type="button">Pedir propuesta con este plan</button>
  </div>
 </div></section>
@@ -187,6 +188,15 @@
  </div>
 </div></section>
 <footer><div class="wrap">Política Aumentada es una línea de servicio de Strategic Design IA · Andrés Zorrilla. Estrategia 360 es una plataforma aliada. Precios de referencia 2026, sujetos a diagnóstico. Los ejemplos usan datos ficticios.</div></footer>
+<dialog id="waDlg" aria-labelledby="waDlgT"><form id="waForm" class="wadlg">
+ <h3 id="waDlgT">Completa tus datos para que el mensaje llegue completo</h3>
+ <label>Tu nombre<input type="text" id="wContact" required maxlength="40" autocomplete="name"></label>
+ <label>Nombre de la candidatura o del cliente<input type="text" id="wName" required maxlength="40"></label>
+ <label>Cargo<select id="wRole"><option>Alcaldía</option><option>Gobernación</option><option>Concejo</option><option>Asamblea</option><option>Partido o movimiento</option><option>Gobierno en ejercicio</option></select></label>
+ <label>Municipio o departamento<input type="text" id="wPlace" required maxlength="40"></label>
+ <div class="wadlg-a"><button class="btn solid" type="submit">Listo, preparar mensaje</button><button class="btn" type="button" id="waCancel">Cancelar</button></div>
+ <a class="btn solid wago" id="waGo" href="#" target="_blank" rel="noopener" hidden>Abrir WhatsApp con mi mensaje</a>
+</form></dialog>
 <div class="toast" id="toast" role="status"></div>
 <script src="js/app.js"></script>
 </body>
