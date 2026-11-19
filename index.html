@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategic Design IA · Política</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wdth,wght@62..125,400..900&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+<header class="top"><div class="in">
+ <a class="brandmark" href="#inicio"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Zorro geométrico tejido con nodos de red">
+<polygon points="16,6 46,36 22,50" fill="#ff7a3d"/><polygon points="104,6 74,36 98,50" fill="#e0532a"/>
+<polygon points="22,18 38,36 26,44" fill="#2a1d6e"/><polygon points="98,18 82,36 94,44" fill="#2a1d6e"/>
+<polygon points="22,50 46,36 60,42 44,62" fill="#ff8f52"/><polygon points="98,50 74,36 60,42 76,62" fill="#ea6232"/>
+<polygon points="8,66 22,50 44,62" fill="#ff7a3d"/><polygon points="112,66 98,50 76,62" fill="#d24a22"/>
+<polygon points="44,62 60,42 60,70" fill="#ff9c63"/><polygon points="76,62 60,42 60,70" fill="#f06d3a"/>
+<polygon points="8,66 44,62 40,84" fill="#fff5ee"/><polygon points="112,66 76,62 80,84" fill="#f1e4da"/>
+<polygon points="44,62 60,70 60,102 40,84" fill="#fff5ee"/><polygon points="76,62 60,70 60,102 80,84" fill="#f1e4da"/>
+<polygon points="40,84 60,102 60,112" fill="#efe2d8"/><polygon points="80,84 60,102 60,112" fill="#e3d4c9"/>
+<polygon points="52,96 68,96 60,106" fill="#2a1d6e"/>
+<path d="M41 60 Q47 55 52 61 Q46 64 41 60Z M79 60 Q73 55 68 61 Q74 64 79 60Z" fill="#2a1d6e"/>
+<g fill="none" stroke="#2a1d6e" stroke-width="1.3" opacity=".75"><path d="M22 50 L46 36 L60 42 L74 36 L98 50 M8 66 L22 50 M112 66 L98 50 M44 62 L60 42 L76 62 M44 62 L60 70 L76 62 M40 84 L60 102 L80 84"/></g>
+<g fill="#2a1d6e"><circle cx="46" cy="36" r="2.8"/><circle cx="74" cy="36" r="2.8"/><circle cx="22" cy="50" r="2.4"/><circle cx="98" cy="50" r="2.4"/><circle cx="8" cy="66" r="2.2"/><circle cx="112" cy="66" r="2.2"/><circle cx="60" cy="70" r="2.4"/><circle cx="40" cy="84" r="2.2"/><circle cx="80" cy="84" r="2.2"/></g>
+<circle cx="60" cy="42" r="3.4" fill="#ff4d6d"/><circle cx="60" cy="42" r="7" fill="none" stroke="#ff4d6d" stroke-width="1.4"/>
+</svg><span>Andrés Zorrilla<small>Strategic Design IA · Política Aumentada</small></span></a>
+ <nav class="scroll" aria-label="Secciones">
+  <a href="#casos">Casos</a><a href="#diagnostico">Diagnóstico</a><a href="#dolores">Soluciones</a><a href="#e360">Estrategia 360</a><a href="#etica">Ética</a>
+ </nav>
+ <button id="planBtn" type="button">Tu plan · <b id="planCount">0</b></button>
+ <div class="progress" id="progress"></div>
+</div></header>
+
+<section class="band hero" id="inicio"><div class="wrap grid">
+ <div>
+  <h1 id="heroTitle">¿Qué le está costando votos a tu campaña?</h1>
+  <p class="lead">Marca tus dolores y mira cómo los resolvemos con inteligencia artificial: con ejemplos que se arman con tu nombre y tu marca, y con el precio a la vista.</p>
+  <div class="ctas"><a class="btn solid" href="#diagnostico">Hacer mi diagnóstico</a><a class="btn" href="#dolores">Ver soluciones</a></div>
+  <div class="stat"><b>69 de 125</b><span>alcaldías de Antioquia se ganaron en 2023 por menos de 1.000 votos. Fuente: Registraduría, escrutinio 2023, procesado por nuestra plataforma aliada.</span></div>
+ </div>
+ <div class="tarjeton" role="img" aria-label="Cuenta regresiva al calendario electoral 2027">
+  <div class="tj-head"><span>Elecciones territoriales · 31 oct 2027</span><span>Gobernación · Alcaldía · Asamblea · Concejo · JAL</span></div>
+  <div class="count">
+   <div><b id="dIns">–</b><span>días para abrir la inscripción de candidaturas (30 jun 2027)</span></div>
+   <div><b id="dEle">–</b><span>días para la jornada electoral (31 oct 2027)</span></div>
+  </div>
+  <div class="phases" id="phases"></div>
+  <p class="tj-foot">Calendario de la Resolución 12338 de 2026 de la Registraduría. Se esperan cerca de 120.000 candidaturas.</p>
+ </div>
+</div></section>
+
+<div style="padding:0 max(5vw,16px)"><div class="wrap">
+ <form class="perso" id="perso" aria-label="Personaliza este portafolio">
+  <h3>Personaliza los ejemplos con tu campaña</h3>
+  <label>Nombre de la candidatura<input type="text" id="pName" maxlength="28" autocomplete="off"></label>
+  <label>Cargo<select id="pRole"><option>Alcaldía</option><option>Gobernación</option><option>Concejo</option><option>Asamblea</option></select></label>
+  <label>Municipio o departamento<input type="text" id="pPlace" maxlength="28" autocomplete="off"></label>
+  <div><span class="tag">Color de marca</span><div class="sw" id="pColors" role="group" aria-label="Color de marca"></div></div>
+  <label class="file"><input type="file" id="pPhoto" accept="image/*"><span id="pPhotoTxt">Subir foto de la candidatura (opcional)</span></label>
+ </form>
+</div></div>
+
+<section class="band" id="casos" style="padding-bottom:0"><div class="wrap">
+ <h2>Trabajo hecho, no promesas</h2>
+ <p class="soft">Tres casos reales de este año. Donde fue posible, retiramos nombres y lugares del cliente.</p>
+ <div class="casos">
+  <a class="caso-card" href="#p-videos"><img src="media/caso-editado.jpg" alt="Fotograma de un video de campaña editado con rótulos" loading="lazy"><span><b>Avatar con voz clonada, no grabado</b>Candidato a la Cámara por Antioquia · febrero 2026</span></a>
+  <a class="caso-card" href="#p-programa"><span class="cc-art" aria-hidden="true"><i style="--x:22%;--y:30%;background:#c2410c"></i><i style="--x:60%;--y:58%;background:#1d6fb8"></i><i style="--x:75%;--y:24%;background:#1e7a3c"></i><i style="--x:35%;--y:72%;background:#c2410c"></i></span><span><b>Plataforma de cocreación ciudadana</b>Campaña a una alcaldía de Antioquia · octubre 2026</span></a>
+  <a class="caso-card" href="#p-academia"><img src="img/caso-barco.webp" alt="Ilustración de la jornada Todos vamos en el mismo barco" loading="lazy"><span><b>Entrenamiento «Todos vamos en el mismo barco»</b>Movilización digital para 80 personas · noviembre 2026</span></a>
+ </div>
+</div></section>
+
+<section class="band" id="diagnostico"><div class="wrap">
+ <h2>Marca los dolores que tiene hoy tu campaña</h2>
+ <p class="soft">Cada casilla que marques se suma a tu plan con su precio. Puedes cambiarla en cualquier momento.</p>
+ <div class="diag-grid" id="diag"></div>
+ <div class="diag-out" id="diagOut"></div>
+</div></section>
+
+<main id="dolores"></main>
+
+<section class="band e3" id="e360"><div class="wrap">
+ <div class="e3-grid">
+  <div class="reveal">
+   <p class="soft" style="margin:0 0 10px">Dolor 6 · Plataforma aliada · software como servicio</p>
+   <h2>¿Sabes en qué puesto están los votos que te faltan?</h2>
+   <p>Estrategia 360 responde con cifras dónde están tus votos, cuántos faltan y qué vence esta semana. Meta, ruta y tablero en 5 semanas, con acompañamiento opcional hasta el 31 de octubre de 2027.</p>
+   <p class="small soft">Plataforma aliada que se integra con los sistemas de este portafolio: la ruta por puesto orienta mensajes, videos por barrio, misiones y programa.</p>
+   <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px"><button class="btn solid" type="button" id="e3cta">Cotizar para mi municipio</button><button class="pick" type="button" id="e3pick" aria-pressed="false" style="width:auto;margin:0"><span class="box"></span>Agregar a mi plan</button></div>
+  </div>
+  <div class="e3card reveal" id="e3hero">
+   <h4><span>¿Dónde están sus votos?</span><span class="ex">Ejemplo · municipio ficticio</span></h4>
+   <div class="mapwrap"><svg id="hexmap" viewBox="0 0 620 420" role="img" aria-label="Mapa de puestos de votación coloreado según votos faltantes"></svg><div class="sweep" aria-hidden="true"></div><div class="hot" id="hot" aria-live="polite"></div></div>
+   <div class="meta"><span class="tag" style="color:#334155">Meta 2027</span><b id="metaN">0</b><span style="font-size:13px">votos para ganar</span><div class="mbar"><i id="metaBar"></i></div><span style="font-size:12.5px">En 2023: 6.120 · faltan <b style="display:inline;font-size:13px;color:#0f172a">3.680</b></span></div>
+  </div>
+ </div>
+ <div class="pipe" aria-label="Cómo fluyen los datos"><div><b>Fuentes</b><span>Registraduría, DANE, contratos, noticias</span></div><div><b>Cruce</b><span>Cuadrado con el conteo oficial</span></div><div><b>Meta y ruta</b><span>Votos que faltan por puesto</span></div><div><b>Tablero y agentes</b><span>Alertas dos veces al día</span></div><div><b>Tú decides</b><span>Aprobar con un botón</span></div><i class="runner"></i></div>
+ <div class="ticker" aria-hidden="true"><div class="tk" id="ticker"></div></div>
+ <div class="e3-tabs">
+  <div class="seg" id="e3seg" role="group" aria-label="Vistas de Estrategia 360"></div><div class="tour"><i id="tourBar"></i></div>
+  <div class="e3-panel" id="e3panel" aria-live="polite"></div>
+ </div>
+ <div class="feat8">
+  <div><b>Radiografía electoral</b>Resultados mesa a mesa, cuadrados con el conteo oficial.</div>
+  <div><b>Meta y ruta</b>Cuántos votos faltan y en qué puesto buscarlos.</div>
+  <div><b>Tablero 360</b>Toda la campaña en una pantalla, en computador o celular, sin internet.</div>
+  <div><b>Quién vive en cada puesto</b>Jóvenes, adultos y mayores alrededor de cada puesto, con el censo del DANE.</div>
+  <div><b>Simulador de alianzas</b>Qué pasa si los rivales se unen o si sumas a uno, puesto por puesto.</div>
+  <div><b>Sala de agentes</b>7 asistentes revisan noticias, contratos y plazos dos veces al día. Tú apruebas.</div>
+  <div><b>Lo que dice la gente</b>Temas y tono en prensa local y redes, sin vigilar a ninguna persona.</div>
+  <div><b>Defensa del voto</b>Mesas reñidas marcadas y testigos necesarios por puesto.</div>
+ </div>
+ <h3 style="margin-top:36px">Capturas de la plataforma</h3>
+ <div class="gallery" id="gallery"></div>
+ <p class="small soft" style="margin-top:8px">Capturas con datos de ejemplo de un municipio ficticio. Toca una imagen para ampliarla.</p>
+ <div class="vers">
+  <div><h3>Versión esencial</h3><p>Municipios de hasta 25 mil habilitados. Radiografía, meta y ruta, tablero, informe con plan de 90 días, kit para el equipo, taller y una actualización en agosto de 2027.</p></div>
+  <div><h3>Versión completa</h3><p>Desde 25 mil habilitados. Todo lo anterior más la Sala de agentes y actualizaciones en abril y agosto de 2027. Seguimiento mensual opcional.</p></div>
+ </div>
+ <p style="margin-top:22px"><b>Se cotiza según el territorio:</b> número de habilitados, puestos de votación y cargo (alcaldía o concejo). Exclusividad para una sola campaña de alcaldía por municipio: la primera que firma y paga la toma. Quién contrata y desde cuándo lo define cada campaña con su abogado (Ley 1475 de 2011, art. 34).</p>
+</div></section>
+<dialog id="lightbox"><button class="x" type="button" id="lbClose" aria-label="Cerrar">×</button><img id="lbImg" alt=""></dialog>
+
+<section class="band" id="plan" style="background:color-mix(in srgb,var(--tinta) 7%,var(--bg))"><div class="wrap plan">
+ <div>
+  <h2>Tu plan</h2>
+  <p class="soft">Cada dolor tiene un producto que queda instalado en tu equipo (pago único) y, cuando aplica, un servicio mensual donde nosotros operamos. Ajusta la escala y los meses de servicio; la propuesta final sale del diagnóstico.</p>
+  <label class="f" for="scale">Escala</label>
+  <select class="f" id="scale">
+   <option value="1" selected>Concejo, asamblea o municipio pequeño (precio de partida)</option>
+   <option value="1.4">Alcaldía de municipio intermedio (+40%)</option>
+   <option value="2">Capital, área metropolitana o gobernación (+100%)</option>
+  </select>
+  <label class="f" for="months">Meses de acompañamiento: <b id="mOut">6</b></label>
+  <input type="range" id="months" min="1" max="11" value="6">
+  <div id="opts" style="margin-top:14px"></div>
+ </div>
+ <div class="result" aria-live="polite">
+  <div class="soft small">Inversión estimada en productos y servicios propios, antes de IVA</div>
+  <div class="big" id="total">$0</div>
+  <div class="soft small" id="perMonth"></div>
+  <div class="lines" id="lines"></div>
+  <p class="small soft">Pagos por hitos: 40% al inicio, 30% a mitad del proyecto y 30% contra entrega. Los servicios mensuales se facturan mes vencido.</p>
+  <button class="btn solid" id="toContact" type="button">Pedir propuesta con este plan</button>
+ </div>
+</div></section>
+
+<section class="band" id="etica"><div class="wrap">
+ <h2>IA declarada: compromisos que firmo con cada cliente</h2>
+ <p class="soft">Trabajo con candidaturas de todo el espectro que acepten estas reglas. Protegen a la campaña de escándalos y al electorado de engaños.</p>
+ <div class="pledge">
+  <div><h3>Contenido sintético rotulado</h3><p>Toda pieza con voz, imagen o avatar generados por IA lleva una marca visible que lo indica.</p></div>
+  <div><h3>Solo con consentimiento</h3><p>Clonamos voz o rostro únicamente de quien lo autoriza por escrito. Nunca de rivales, periodistas ni terceros.</p></div>
+  <div><h3>Cero suplantación</h3><p>La Ley 2502 de 2025 agrava la suplantación con IA. No producimos deepfakes, perfiles falsos ni redes de cuentas automatizadas.</p></div>
+  <div><h3>Datos con Habeas Data</h3><p>Registros de simpatizantes con autorización expresa, finalidad clara y tratamiento conforme a la Ley 1581 de 2012.</p></div>
+  <div><h3>Verificación antes de publicar</h3><p>Cifras y afirmaciones pasan por revisión humana con fuente. La IA propone; el equipo responde.</p></div>
+  <div><h3>Gasto trazable</h3><p>Facturación clara para reportar en la contabilidad de campaña dentro de los topes que fija el CNE.</p></div>
+ </div>
+</div></section>
+
+<section class="band contact" id="contacto"><div class="wrap plan">
+ <div>
+  <h2>Empecemos con un diagnóstico de 45 minutos</h2>
+  <p style="color:#d6d0fb">Revisamos tu territorio, tu equipo y tu calendario. Sales con tres oportunidades concretas de uso de IA, aunque no trabajemos juntos.</p>
+  <div style="display:flex;gap:14px;align-items:center;margin:18px 0 8px"><svg style="width:64px;height:64px;flex:none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Zorro geométrico tejido con nodos de red">
+<polygon points="16,6 46,36 22,50" fill="#ff7a3d"/><polygon points="104,6 74,36 98,50" fill="#e0532a"/>
+<polygon points="22,18 38,36 26,44" fill="#2a1d6e"/><polygon points="98,18 82,36 94,44" fill="#2a1d6e"/>
+<polygon points="22,50 46,36 60,42 44,62" fill="#ff8f52"/><polygon points="98,50 74,36 60,42 76,62" fill="#ea6232"/>
+<polygon points="8,66 22,50 44,62" fill="#ff7a3d"/><polygon points="112,66 98,50 76,62" fill="#d24a22"/>
+<polygon points="44,62 60,42 60,70" fill="#ff9c63"/><polygon points="76,62 60,42 60,70" fill="#f06d3a"/>
+<polygon points="8,66 44,62 40,84" fill="#fff5ee"/><polygon points="112,66 76,62 80,84" fill="#f1e4da"/>
+<polygon points="44,62 60,70 60,102 40,84" fill="#fff5ee"/><polygon points="76,62 60,70 60,102 80,84" fill="#f1e4da"/>
+<polygon points="40,84 60,102 60,112" fill="#efe2d8"/><polygon points="80,84 60,102 60,112" fill="#e3d4c9"/>
+<polygon points="52,96 68,96 60,106" fill="#2a1d6e"/>
+<path d="M41 60 Q47 55 52 61 Q46 64 41 60Z M79 60 Q73 55 68 61 Q74 64 79 60Z" fill="#2a1d6e"/>
+<g fill="none" stroke="#2a1d6e" stroke-width="1.3" opacity=".75"><path d="M22 50 L46 36 L60 42 L74 36 L98 50 M8 66 L22 50 M112 66 L98 50 M44 62 L60 42 L76 62 M44 62 L60 70 L76 62 M40 84 L60 102 L80 84"/></g>
+<g fill="#2a1d6e"><circle cx="46" cy="36" r="2.8"/><circle cx="74" cy="36" r="2.8"/><circle cx="22" cy="50" r="2.4"/><circle cx="98" cy="50" r="2.4"/><circle cx="8" cy="66" r="2.2"/><circle cx="112" cy="66" r="2.2"/><circle cx="60" cy="70" r="2.4"/><circle cx="40" cy="84" r="2.2"/><circle cx="80" cy="84" r="2.2"/></g>
+<circle cx="60" cy="42" r="3.4" fill="#ff4d6d"/><circle cx="60" cy="42" r="7" fill="none" stroke="#ff4d6d" stroke-width="1.4"/>
+</svg><div><b style="font:850 24px/1.1 Archivo,system-ui,sans-serif">Andrés Zorrilla</b><br><span style="color:#bdb4ee">Strategic Design IA</span></div></div><p>Andrés Felipe Agudelo Zorrilla<br><span style="color:#bdb4ee">Medellín, Colombia · Nueve años diseñando estrategia para organizaciones públicas, privadas y sociales. Filósofo con maestría en comunicación política.</span></p>
+ </div>
+ <div>
+  <label class="f" for="msg" style="color:#bdb4ee">Mensaje listo para enviar por WhatsApp o correo</label>
+  <textarea id="msg"></textarea>
+  <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn solid" id="waBtn" href="#" target="_blank" rel="noopener" hidden>Enviar por WhatsApp</a><button class="btn" id="copy" type="button" style="color:#fff">Copiar mensaje</button></div><p class="small" id="waTxt" style="color:#bdb4ee"></p>
+ </div>
+</div></section>
+<footer><div class="wrap">Política Aumentada es una línea de servicio de Strategic Design IA · Andrés Zorrilla. Estrategia 360 es una plataforma aliada. Precios de referencia 2026, sujetos a diagnóstico. Los ejemplos usan datos ficticios.</div></footer>
+<div class="toast" id="toast" role="status"></div>
+<script src="js/app.js"></script>
+</body>
+</html>
