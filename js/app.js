@@ -23,16 +23,16 @@ agua:{tag:'Agua para el campo',hook:'¿El agua llega un día sí y otro no?',slo
 seguridad:{tag:'Barrios con luz',hook:'¿Te da miedo volver de noche?',slogan:'Barrios con luz y vida',script:'Soy {n}. En {p} vamos a iluminar parques y rutas escolares, con cámaras y presencia en las salidas del colegio.',pts:['Luz en parques y puentes','Rutas escolares seguras','Cámaras conectadas']}};
 const fill=s=>s.replace('{n}',st.name.trim()||DEF.name).replace('{p}',st.place.trim()||DEF.place);
 const MOD=[
-{k:'marca_p',n:'Sistema de marca con skills de creación y diseño gráfico',q:'Producto instalado en tu equipo: marca, prompts y skills para crear piezas con IA',p:2e6,m:0},
-{k:'piezas_s',n:'Creación de piezas gráficas mes a mes',q:'Servicio de agencia: producimos y entregamos tus piezas cada mes',p:4e6,m:1},
-{k:'avatar_p',n:'Avatar, voz clonada y sistema de creación audiovisual',q:'Producto: avatar y voz autorizados, plantillas de edición y guiones por territorio',p:5e6,m:0},
-{k:'video_s',n:'Contenido con avatar y otros videos',q:'Servicio de agencia: videos con avatar por territorio y otras piezas audiovisuales cada mes',p:7e6,m:1},
-{k:'cocrea_p',n:'Plataforma de cocreación, lectura de territorio, bosquejo de plan de gobierno, mensaje y marca',q:'Producto: plataforma instalada y documentos base de programa y mensaje',p:5e6,m:0},
-{k:'tecno_s',n:'Consultoría en tecnopolítica y laboratorios ciudadanos',q:'Servicio opcional: 40 horas al mes de consultoría y facilitación',p:5e6,m:1},
-{k:'landing_p',n:'Landing de captación y misiones gamificadas para activistas',q:'Producto: landing, formulario, hoja de simpatizantes y micrositio de misiones',p:5e6,m:0},
-{k:'gamif_s',n:'Acompañamiento a la gamificación y otras estrategias',q:'Servicio opcional: 40 horas al mes',p:5e6,m:1},
-{k:'taller_p',n:'Taller de movilización digital e IA',q:'Producto: taller «Todos vamos en el mismo barco» con kit y artefacto en vivo',p:3e6,m:0}];
-const COMBO=5e6;
+{k:'marca_p',n:'Sistema de marca con skills de creación y diseño gráfico',q:'Producto instalado en tu equipo: marca, prompts y skills para crear piezas con IA',p:1e6,m:0},
+{k:'piezas_s',n:'Creación de piezas gráficas mes a mes',q:'Servicio de agencia: 20 piezas al mes en la tarifa base; el volumen crece con la escala',p:2e6,m:1},
+{k:'avatar_p',n:'Avatar, voz clonada y sistema de creación audiovisual',q:'Producto: avatar y voz autorizados, plantillas de edición y guiones por territorio',p:2.5e6,m:0},
+{k:'video_s',n:'Contenido con avatar y otros videos',q:'Servicio de agencia: 6 videos al mes en la tarifa base (avatar por territorio y otros formatos); el volumen crece con la escala',p:3.5e6,m:1},
+{k:'cocrea_p',n:'Plataforma de cocreación, lectura de territorio, bosquejo de plan de gobierno, mensaje y marca',q:'Producto: plataforma instalada y documentos base de programa y mensaje',p:3e6,m:0},
+{k:'tecno_s',n:'Consultoría en tecnopolítica y laboratorios ciudadanos',q:'Servicio opcional: 40 horas al mes de consultoría y facilitación',p:3e6,m:1},
+{k:'landing_p',n:'Landing de captación y misiones gamificadas para activistas',q:'Producto: landing, formulario, hoja de simpatizantes y micrositio de misiones',p:2.5e6,m:0},
+{k:'gamif_s',n:'Acompañamiento a la gamificación y otras estrategias',q:'Servicio opcional: 40 horas al mes',p:3e6,m:1},
+{k:'taller_p',n:'Taller de movilización digital e IA',q:'Producto: taller «Todos vamos en el mismo barco» con kit y artefacto en vivo',p:1.5e6,m:0}];
+const COMBO=4.5e6;
 const MK=Object.fromEntries(MOD.map(m=>[m.k,m]));
 st.mods=new Set([...st.mods].filter(k=>MK[k]));
 const PAINS=[
@@ -72,7 +72,7 @@ $('#dolores').innerHTML=PAINS.map((p,i)=>{const lines=p.mods.map(k=>MK[k]);const
  ${p.mods.map(k=>MK[k]).map(m=>`<div class="pp"><span class="tagp">Producto · pago único</span><b>${m.n}</b><div class="amt">${M(m.p)}</div><button class="pick" type="button" data-pain="${p.id}" aria-pressed="false"><span class="box"></span>Agregar producto a mi plan</button></div>`).join('')}
  ${p.svc?`<div class="pp"><span class="tagp">Servicio mensual · ${p.combo?'agencia':'opcional'}</span><b>${MK[p.svc].n}</b><div class="amt sm">${M(MK[p.svc].p)} <small>/ mes</small></div><small class="per">${MK[p.svc].q}</small><button class="pick" type="button" data-mod="${p.svc}" aria-pressed="false"><span class="box"></span>Agregar servicio mensual</button></div>`:''}
  ${p.combo?`<p class="combo">Si contratas el servicio gráfico y el audiovisual juntos, los dos quedan en ${M(COMBO)} al mes.</p>`:''}
- <div class="per">Concejo o municipio pequeño, antes de IVA. El valor sube según la escala de la campaña. No incluye suscripciones a plataformas de IA ni costos de integración tecnológica (APIs, hosting, dominios, entre otros).</div></div>
+ <div class="per">Tarifa base: municipio pequeño, concejo, asamblea o etapa de aval, antes de IVA. El valor y el volumen suben según la escala de la campaña. No incluye suscripciones a plataformas de IA ni costos de integración tecnológica (APIs, hosting, dominios, entre otros).</div></div>
 </div>${p.tabs?`<div class="demo reveal"><div class="seg ptabs" role="tablist">${p.tabs.map((t,k)=>`<button type="button" data-pane="${t[1]}" aria-pressed="${!k}">${t[0]}</button>`).join('')}</div>${p.tabs.map((t,k)=>`<div class="pane" id="demo-${t[1]}"${k?' hidden':''}></div>`).join('')}</div>`:`<div class="demo reveal" id="demo-${p.id}"></div>`}</div></div></section>`}).join('');
 $('#dolores').addEventListener('click',e=>{const tb=e.target.closest('.ptabs button');if(tb){const box=tb.closest('.demo');box.querySelectorAll('.ptabs button').forEach(x=>x.setAttribute('aria-pressed',x==tb));box.querySelectorAll('.pane').forEach(p=>p.hidden=p.id!='demo-'+tb.dataset.pane);return}const md=e.target.closest('.pick[data-mod]');if(md){const k=md.dataset.mod;const on=st.mods.has(k);on?st.mods.delete(k):st.mods.add(k);syncPicks();toast(on?'Servicio quitado de tu plan':'Servicio agregado a tu plan');return}const b=e.target.closest('.pick');if(b){const was=b.getAttribute('aria-pressed')=='true';togglePain(b.dataset.pain);toast(was?'Quitado de tu plan':'Agregado a tu plan')}});
 
