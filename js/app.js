@@ -25,13 +25,13 @@ const fill=s=>s.replace('{n}',st.name.trim()||DEF.name).replace('{p}',st.place.t
 const MOD=[
 {k:'marca_p',n:'Sistema de marca con skills de creación y diseño gráfico',q:'Producto instalado en tu equipo: marca, prompts y skills para crear piezas con IA',p:1e6,m:0},
 {k:'piezas_s',n:'Creación de piezas gráficas mes a mes',q:'Servicio de agencia: 20 piezas al mes en la tarifa base; el volumen crece con la escala',p:2e6,m:1},
-{k:'avatar_p',n:'Avatar, voz clonada y sistema de creación audiovisual',q:'Producto: avatar y voz autorizados, plantillas de edición y guiones por territorio',p:2.5e6,m:0},
+{k:'avatar_p',n:'Avatar, voz clonada y sistema de creación audiovisual',q:'Producto: avatar y voz autorizados, plantillas de edición y guiones por territorio',p:1e6,m:0},
 {k:'video_s',n:'Contenido con avatar y otros videos',q:'Servicio de agencia: 6 videos al mes en la tarifa base (avatar por territorio y otros formatos); el volumen crece con la escala',p:3.5e6,m:1},
-{k:'cocrea_p',n:'Plataforma de cocreación, lectura de territorio, bosquejo de plan de gobierno, mensaje y marca',q:'Producto: plataforma instalada y documentos base de programa y mensaje',p:3e6,m:0},
+{k:'cocrea_p',n:'Plataforma de cocreación, lectura de territorio, bosquejo de plan de gobierno, mensaje y marca',q:'Producto: plataforma instalada y documentos base de programa y mensaje',p:1e6,m:0},
 {k:'tecno_s',n:'Consultoría en tecnopolítica y laboratorios ciudadanos',q:'Servicio opcional: 40 horas al mes de consultoría y facilitación',p:3e6,m:1},
-{k:'landing_p',n:'Landing de captación y misiones gamificadas para activistas',q:'Producto: landing, formulario, hoja de simpatizantes y micrositio de misiones',p:2.5e6,m:0},
+{k:'landing_p',n:'Landing de captación y misiones gamificadas para activistas',q:'Producto: landing, formulario, hoja de simpatizantes y micrositio de misiones',p:1e6,m:0},
 {k:'gamif_s',n:'Acompañamiento a la gamificación y otras estrategias',q:'Servicio opcional: 40 horas al mes',p:3e6,m:1},
-{k:'taller_p',n:'Taller de movilización digital e IA',q:'Producto: taller «Todos vamos en el mismo barco» con kit y artefacto en vivo',p:1.5e6,m:0}];
+{k:'taller_p',n:'Taller de movilización digital e IA',q:'Producto: taller «Todos vamos en el mismo barco» con kit y artefacto en vivo',p:1e6,m:0}];
 const COMBO=4.5e6;
 const MK=Object.fromEntries(MOD.map(m=>[m.k,m]));
 st.mods=new Set([...st.mods].filter(k=>MK[k]));
